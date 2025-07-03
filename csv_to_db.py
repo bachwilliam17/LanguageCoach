@@ -3,6 +3,11 @@ import sqlite3
 import os
 
 
+def conversion_procedure() : 
+    file_to_convert = choose_csv_file()
+    convert_csv_to_db(file_to_convert)
+    
+
 def choose_csv_file() :
 
     csv_files = [f for f in os.listdir('.') if f.endswith('.csv')]
@@ -41,11 +46,3 @@ def convert_csv_to_db(csv_file) :
     #test = conn.execute(f"SELECT * FROM examples_table LIMIT 5").fetchall()
     #for ligne in test : 
     #    print(ligne)
-
-
-
-file_to_convert = choose_csv_file()
-convert_csv_to_db(file_to_convert)
-
-
-
