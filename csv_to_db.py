@@ -5,7 +5,8 @@ import os
 
 def conversion_procedure() : 
     file_to_convert = choose_csv_file()
-    convert_csv_to_db(file_to_convert)
+    new_db = convert_csv_to_db(file_to_convert)
+    return new_db
     
 
 def choose_csv_file() :
@@ -39,9 +40,11 @@ def convert_csv_to_db(csv_file) :
     db_name = csv_file.replace(".csv", "")
 
     conn = sqlite3.connect(f"{db_name}.db")
-    df.to_sql("examples_table", conn, if_exists="replace", index=False)
+    df.to_sql(f"{db_name}", conn, if_exists="replace", index=False)
 
-    print(f"Table examples_table dans la BD {db_name}.bd maintenant configurée.")
+    print(f"Table {db_name} dans la BD {db_name}.bd maintenant configurée.")
+
+    return f"{db_name}.db"
 
     #test = conn.execute(f"SELECT * FROM examples_table LIMIT 5").fetchall()
     #for ligne in test : 
